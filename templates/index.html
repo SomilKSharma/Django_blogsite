@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+            background: #f1f1f1;
+        }
+
+        .header {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px rgba(29, 27, 27, 0.2);
+            transition: 1s;
+        }
+
+        .card h2 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .card h5 {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .card p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0078d4;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .card:hover {
+            transform: translate(-10px, -10px);
+        }
+
+
+        @media screen and (max-width: 800px) {
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Somil's Blog</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="leftcolumn">
+                {% for post in posts reversed %}
+                <div class="card">
+                    <a href="/post/{{post.id}}">
+                        <h2>{{post.title}}</h2>
+                        <h5>{{post.created_at}}</h5>
+                        <p>{{post.body|truncatewords:40}}</p>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePostContent(titleElement) {
+            var content = titleElement.nextElementSibling;
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>
